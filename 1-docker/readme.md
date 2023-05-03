@@ -82,6 +82,8 @@ Images has:
 - name 
 - version (optional, but necessary)
 
+<img src="assets/image.png" />
+
 Images are immutable, so if you change something, it will create a new layer.
 
 If you stop a container, it will not delete the container, but if you remove the container, it will delete the container. And all write layer will be deleted.
@@ -89,6 +91,9 @@ If you stop a container, it will not delete the container, but if you remove the
 ### Dockerfile
 
 From dockerfile, we can create a image.
+
+<img src="assets/build.png" />
+
 
 ## Starting with Docker
 
