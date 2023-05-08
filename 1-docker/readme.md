@@ -94,6 +94,29 @@ From dockerfile, we can create a image.
 
 <img src="assets/build.png" />
 
+# Docker Host
+
+Docker Host is the machine that run the docker.
+
+- Daemon API
+- Cache
+- Volumes ( Container are immutable, so we need a place to store the data)
+- Network ( Communication between containers)
+
+# Registry
+
+Registry is the place that store the images.
+- Push
+- Pull
+
+# Docker Client
+
+Docker Client has the commands to interact with Docker Host.
+- Container
+- Run, pull, push
+- Volumes
+
+<img src="assets/docker_works.png" />
 
 ## Starting with Docker
 
