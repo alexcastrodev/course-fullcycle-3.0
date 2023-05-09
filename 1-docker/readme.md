@@ -120,7 +120,53 @@ Docker Client has the commands to interact with Docker Host.
 
 ## Starting with Docker
 
-soon...
+
+### List Docker Containers
+
+```bash
+docker ps
+```
+
+### Install image
+
+```bash
+docker run node
+Unable to find image 'node:latest' locally # if not found, it will download
+latest: Pulling from library/node
+# ...
+```
+
+### Interative mode
+
+```bash
+docker run -it node
+```
+
+### List all container ( running and stopped )
+
+```bash
+docker ps -a
+CONTAINER ID   IMAGE   COMMAND                 CREATED         STATUS                     PORTS                    NAMES
+c0618402c677   node    "docker-entrypoints…"   3 minutes ago   Exited (0) 3 seconds ago focused_lewin
+```
+
+### Remove container after exit
+
+```bash
+docker run -it --rm node
+```
+
+### Run container in background
+
+```bash
+docker run -d node
+```
+
+### Publish port
+
+```bash
+docker run -d -p 3000:80 nginx
+```
 
 ## Working with Images
 
