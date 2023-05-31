@@ -1,0 +1,87 @@
+# Dockerfile best practices
+
+- Use multi-stage builds to reduce the size of the image.
+- Use `.dockerignore` to prevent files and directories from being copied to the image.
+- Use the `--no-cache` option when building the image to prevent the cache from being used.
+- Use the `--rm` option when running the container to remove the container when it is stopped.
+- Use the `--init` option when running the container to ensure that the container is stopped correctly.
+- Use the `--restart` option when running the container to ensure that the container is restarted when it is stopped.
+- Use the `--detach` option when running the container to run it in the background.
+- Use the `--name` option when running the container to give it a name.
+- Use the `--publish` option when running the container to publish ports.
+- Use the `--volume` option when running the container to mount volumes.
+- Use the `--env` option when running the container to define environment variables.
+- Use the `--env-file` option when running the container to define environment variables from a file.
+- Use the `--link` option when running the container to link containers.
+- Use the `--network` option when running the container to define the network that the container will use.
+- Use the `--hostname` option when running the container to define the hostname of the container.
+- Use the `--add-host` option when running the container to define the hostname and IP address of the container.
+- Use the `--user` option when running the container to define the user that will be used to run the commands.
+- Use the `--workdir` option when running the container to define the working directory.
+- Use the `--entrypoint` option when running the container to define the default command that will be executed when the container is started.
+- Use the `--log-driver` option when running the container to define the logging driver.
+- Use the `--log-opt` option when running the container to define logging driver options.
+- Use the `--cap-add` option when running the container to add capabilities.
+- Use the `--cap-drop` option when running the container to drop capabilities.
+- Use the `--security-opt` option when running the container to define security options.
+- Use the `--ulimit` option when running the container to define ulimits.
+- Use the `--memory` option when running the container to define the memory limit.
+- Use the `--memory-swap` option when running the container to define the swap limit.
+- Use the `--memory-reservation` option when running the container to define the memory reservation.
+- Use the `--cpu-shares` option when running the container to define the CPU shares.
+- Use the `--cpu-period` option when running the container to define the CPU period.
+- Use the `--cpu-quota` option when running the container to define the CPU quota.
+- Use the `--cpuset-cpus` option when running the container to define the CPUs that the container can use.
+- Use the `--cpuset-mems` option when running the container to define the memory nodes that the container can use.
+- Use the `--isolation` option when running the container to define the container isolation technology.
+- Use the `--tmpfs` option when running the container to define a temporary file system.
+- Use the `--device` option when running the container to define a device.
+- Use the `--device-read-bps` option when running the container to define the device read bytes per second.
+- Use the `--device-read-iops` option when running the container to define the device read I/O operations per second.
+- Use the `--device-write-bps` option when running the container to define the device write bytes per second.
+- Use the `--device-write-iops` option when running the container to define the device write I/O operations per second.
+- Use the `--mount` option when running the container to define a mount.
+- Use the `--label` option when running the container to define a label.
+- Use the `--cidfile` option when running the container to define a file that will contain the container ID.
+- Use the `--pidfile` option when running the container to define a file that will contain the process ID.
+- Use the `--ipc` option when running the container to define the IPC mode.
+- Use the `--stop-signal` option when running the container to define the signal that will be sent to the container to stop it.
+- Use the `--stop-timeout` option when running the container to define the timeout that will be used to stop the container.
+- Use the `--tty` option when running the container to allocate a pseudo-TTY.
+- Use the `--interactive` option when running the container to keep STDIN open.
+- Use the `--detach-keys` option when running the container to define the keys that will be used to detach from the container.
+- Use the `--sig-proxy` option when running the container to proxy all signals to the process.
+- Use the `--read-only` option when running the container to mount the container's root filesystem as read only.
+- Use the `--shm-size` option when running the container to define the size of the /dev/shm mount.
+- Use the `--init-path` option when running the container to define the path to the init binary.
+- Use the `--userns` option when running the container to define the user namespace.
+- Use the `--pids-limit` option when running the container to define the pids limit.
+- Use the `--cgroup-parent` option when running the container to define the cgroup parent.
+- Use the `--volume-driver` option when running the container to define the volume driver.
+- Use the `--storage-opt` option when running the container to define storage options.
+- Use the `--dns` option when running the container to define the DNS servers.
+- Use the `--dns-opt` option when running the container to define DNS options.
+- Use the `--dns-search` option when running the container to define DNS search domains.
+- Use the `--mac-address` option when running the container to define the MAC address.
+- Use the `--network-alias` option when running the container to define network aliases.
+- Use the `--link-local-ip` option when running the container to define the link local IPv4 address.
+- Use the `--link-local-ip-prefix` option when running the container to define the link local IPv4 prefix length.
+- Use the `--ipv6` option when running the container to enable IPv6 networking.
+- Use the `--ipv6-address` option when running the container to define the IPv6 address.
+- Use the `--ipv6-prefix-length` option when running the container to define the IPv6 prefix length.
+- Use the `--sysctl` option when running the container to define sysctl options.
+- Use the `--ip` option when running the container to define the IPv4 address.
+- Use the `--ip6` option when running the container to define the IPv6 address.
+- Use the `--ip6-prefix-length` option when running the container to define the IPv6 prefix length.
+- Use the `--ip6-iptables` option when running the container to enable IPv6 iptables rules.
+- Use the `--ip6-iptables` option when running the container to enable IPv6 iptables rules.
+- Use the `--ip-forward` option when running the container to enable IPv4 forwarding.
+- Use the `--ip-masq` option when running the container to enable IP masquerading.
+- Use the `--bridge` option when running the container to define the bridge that will be used.
+- Use the `--link-local-cidr` option when running the container to define the link local CIDR.
+- Use the `--default-gateway` option when running the container to define the default gateway.
+- Use the `--default-gateway-v6` option when running the container to define the default IPv6 gateway.
+- Use the `--expose` option when running the container to expose a container's port.
+- Use the `--publish-all` option when running the container to publish all exposed ports.
+- Use the `--label-file` option when running the container to define the labels file.
+- Use the `--runtime` option when running the container to define the runtime.
