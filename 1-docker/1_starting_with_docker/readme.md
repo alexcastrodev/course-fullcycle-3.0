@@ -225,3 +225,105 @@ docker run -d --name webserver --mount type=bind,source="$(pwd)/html",target=/us
 ```bash
 docker rm -f $(docker ps)
 ```
+
+# Volumes
+
+### Create a new volume
+
+```bash
+docker volume create alekinho
+```
+
+### List volumes
+
+```bash
+docker volume ls
+```
+
+### Remove volume
+
+```bash
+docker volume rm alekinho
+```
+
+### Inspect 
+
+```bash
+docker volume inspect alekinho
+[
+    {
+        "CreatedAt": "2023-05-31T21:25:12Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/alekinho/_data",
+        "Name": "alekinho",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
+### Bind mount
+
+```bash
+docker run --name nginx -d  --mount type=volume,source=alekinho,target=/app nginx
+b7921a3aedfbcccb987a6d9aa5171d030bbc8819ab59a0b1f2f00e3e190f173b
+```
+
+If i create a file in /app, it will be created in volume.
+
+```bash
+docker exec -it nginx bash
+root@b7921a3aedfb:/# cd app/
+root@b7921a3aedfb:/app# touch oi.txt
+root@b7921a3aedfb:/app# ls
+file.txt
+```
+
+Now, if i create a new container, it will have the oi.txt
+
+```bash
+docker run --name nginx2 -d  --mount type=volume,source=alekinho,target=/app nginx
+ce397a54e2f5c764c74289bab36ffbc3a214d0f37b05eebb918a406d2814b98e
+➜  ~ docker exec -it nginx2 bash
+root@ce397a54e2f5:/# cd app/
+root@ce397a54e2f5:/app# ls
+oi.txt
+```
+
+Create now nginx3 just with bind mount with -v
+
+```bash
+docker run --name nginx3 -d  -v alekinho:/app nginx
+```
+
+
+# Tips
+
+To delete volumes that are not used by any container
+
+```bash
+docker volume prune
+```
+
+example:
+
+```bash
+1_starting_with_docker git:(main) ✗ docker volume prune
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Deleted Volumes:
+5754d89edffb8f8ef0b7ab0e01a53f2dcf27e9aa0cd586112d3eeda269b55098
+01f7219bc39a90dc7dee20d9191eba9de0027e4dc7b3cad3279481154ecd13c5
+0e9fede613b2f57bd831bb56e111c932fd2c76a8442c9b8619e13d7f161aa439
+246ab8de7ae7243d866922d527d7b6bbcf574eae265f8c347bef9bab5d42525a
+9f3e99afa55ffe00863edb3fbee69aa10c68dfc8d4f626983585e81527d584aa
+grafana-influx_chronograf-storage
+grafana-influx_influxdb-storage
+89924bf7d55f6aa8c373b2555c42eee2f0c2772509ef60577f0148e514213f9a
+f894fe3a1e4f366f2b6b1bd3a58eebc064ec83d55cf33ad4b36c094cc60f305c
+grafana-influx_grafana-storage
+4f91e5bac9d74a76c5aa693a1557ed5f5334a6d540805ca2a85b919b4010b306
+
+Total reclaimed space: 120.4MB
+```
