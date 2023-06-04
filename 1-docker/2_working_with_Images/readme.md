@@ -121,7 +121,42 @@ CMD ["echo", "Hello World"]
 
 If i execute: `docker run newgate7x/hello-world`, the output will be: `Hello World`. And Container will not be running.
 
+if i run like:
 
+```bash
+docker run -it newgate7x/hello-world echo "Hello Docker"
+```
+
+The output will be: `Hello Docker`. And Container will not be running.
+I replace the CMD command with echo "Hello Docker"
+
+If i want to run echo "Hello World" when the container is started, i can use the `ENTRYPOINT` instruction.
+
+```bash
+FROM ubuntu:latest
+
+ENTRYPOINT ["echo", "Hello "]
+CMD ["World"]
+```
+
+after run `docker run newgate7x/hello-world Alex`, the output will be: `Hello Alekinho`.
+
+1 => the Alex replace the CMD command
+2 => the CMD command is used as a default value
+3 => the ENTRYPOINT command a fixed command
+
+# publish
+
+Testing begore push
+
+```bash
+docker run --rm -d -p 3000:80 newgate7x/nginx-with-vim
+```
+
+```bash
+docker build -t newgate7x/hello-world:1.0 .
+docker push newgate7x/hello-world:1.0
+```
 
 # Tips
 
