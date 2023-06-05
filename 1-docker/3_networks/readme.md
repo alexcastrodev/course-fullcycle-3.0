@@ -172,5 +172,36 @@ curl localhost:80
 curl: (7) Failed to connect to localhost port 80 after 5 ms: Couldn't connect to server
 ```
 
-# Container accessing outside
+# Container accessing outside port
 
+Imagine im running the server folder like:
+
+```bash
+php -S 0.0.0.0:8000
+[Mon Jun  5 21:45:53 2023] PHP 8.2.6 Development Server (http://0.0.0.0:8000) started
+```
+
+Now, i want to access the server from another container.
+
+```bash
+docker run --rm -it --name alekinho ubuntu bash
+```
+
+Now, i will install curl and try to access the server:
+I will not use localhost, but http://host.docker.internal
+
+```bash
+root@1d9455d422a5:/# curl http://host.docker.internal:8000
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h1>Server</h1>
+</body>
+</html>
+```
