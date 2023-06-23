@@ -118,3 +118,124 @@ Starting Laravel development server: http://0.0.0.0:8000
 [Thu Jun 15 20:32:49 2023] 172.17.0.1:56418 [200]: GET /favicon.ico
 [Thu Jun 15 20:32:49 2023] 172.17.0.1:56418 Closing
 ```
+
+# NodeJS
+
+We can do it with Node running docker run
+
+using --rm to remove container after exit
+
+using -it to interactive mode
+
+using -v to mount a volume => -v ${pwd}:/usr/src/app
+
+using -p to expose port => -p 3000:3000
+
+and finally the image name => node:18-alpine
+
+add bash in the end to run bash
+
+
+```bash
+
+docker run --rm -it -v $PWD:/usr/src/app -p 3000:3000 node:18 bash
+
+Unable to find image 'node:18' locally
+18: Pulling from library/node
+a31111d07004: Pull complete 
+2455b3521079: Pull complete 
+dd13397d6ccd: Pull complete 
+344a74fed666: Pull complete 
+60b2c1a2936f: Pull complete 
+879df467f24e: Pull complete 
+fea547e8ea42: Pull complete 
+a2a3b9344e24: Pull complete 
+Digest: sha256:19892542dd80e33aec50a51619ab36db0921de240c6a4ff6024d801f84881293
+Status: Downloaded newer image for node:18
+root@6f55d2879bdf:/# cd /usr/src/app && touch oi.js
+```
+
+This will create a file in your current folder, because we mount the volume
+
+PS: this bellow command not work for mac:
+
+```bash
+docker run --rm -it -v ${pwd}/:/usr/src/app -p 3000:3000 node:18 bash
+```
+
+Now we gonna build a image with Dockerfile
+
+I created a dockerfile inside node folder
+
+To build the image:
+
+```bash
+docker build -t newgate7x/hello-express .
+```
+
+Now i want to test it:
+
+```bash
+docker run --rm -it -p 3000:3000 newgate7x/hello-express
+```
+
+Now i will send to docker hub:
+
+```bash
+docker push newgate7x/hello-express
+```
+
+to build file production:
+
+```bash
+docker build -t newgate7x/hello-express -f Dockerfile.prod .
+```
+
+# Optimizing Dockerfile
+
+1 - We can use alpine image, because it is smaller
+2 - We can use Multi Stage Build, to build and run in different images
+
+The second stage we will remove the current html folder
+
+```dockerfile
+RUN rm -rf /var/www/html
+```
+
+Now we will copy folder from first stage
+
+```dockerfile
+COPY --from=builder /var/www/html /var/www/html
+```
+
+and give permission to www-data
+
+```dockerfile
+RUN chown -R www-data:www-data /var/www/html
+```
+
+Now we will expose port and run php-fpm
+
+```dockerfile
+EXPOSE 9000
+
+CMD ["php-fpm"]
+```
+
+
+Now, lets build:
+
+```bash
+docker build -t newgate7x/laravel:prod . -f Dockerfile.prod
+```
+
+lets show our images now:
+
+```bash
+docker images | grep laravel
+
+newgate7x/laravel                               prod            3444f2e607aa   51 seconds ago   140MB
+newgate7x/laravel                               latest          d44fc4bf7a86   57 seconds ago   519MB
+```
+
+Look the difference between prod and latest, prod is 140MB and latest is 519MB
