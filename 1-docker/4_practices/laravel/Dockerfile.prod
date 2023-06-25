@@ -1,6 +1,6 @@
 FROM php:7.4-cli AS builder
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 RUN apt-get update && \
     apt-get install curl -y && \
@@ -9,11 +9,7 @@ RUN apt-get update && \
 
 RUN curl -sS https://getcomposer.org/installer | php
 
-RUN ./composer.phar create-project --prefer-dist laravel/laravel blog
-
-ENTRYPOINT [ "php", "blog/artisan", "serve" ]
-
-CMD [ "--host=0.0.0.0" ]
+RUN ./composer.phar create-project --prefer-dist laravel/laravel laravel
 
 FROM php:7.4-fpm-alpine
 
@@ -21,9 +17,11 @@ WORKDIR /var/www
 
 RUN rm -rf /var/www/html
 
-COPY --from=builder /var/www/html /var/www/html
+COPY --from=builder /var/www/laravel /var/www/laravel
 
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/laravel
+
+RUN ln -s /var/www/laravel/public /var/www/html
 
 EXPOSE 9000
 

@@ -239,3 +239,40 @@ newgate7x/laravel                               latest          d44fc4bf7a86   5
 ```
 
 Look the difference between prod and latest, prod is 140MB and latest is 519MB
+
+lets add a nginx to our project:
+
+```bash
+cd nginx
+```
+
+I already created a Dockerfile, now lets build:
+
+```bash
+docker build -t newgate7x/nginx:prod . -f Dockerfile.prod
+```
+
+now, let put them in the same network:
+
+```bash
+docker network create laranet
+```
+
+Now we can run our containers:
+
+```bash
+docker run --rm --name laravel -d --network laranet -p 9000:9000 newgate7x/laravel:prod
+docker run --rm --name nginx -d --network laranet -p 8080:80 newgate7x/nginx:prod
+
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                  NAMES
+762cf13e603a   newgate7x/nginx:prod     "/docker-entrypoint.…"   3 seconds ago    Up 2 seconds    0.0.0.0:8080->80/tcp   nginx
+d5e9309d480e   newgate7x/laravel:prod   "docker-php-entrypoi…"   39 seconds ago   Up 38 seconds   9000/tcp               laravel
+```
+
+In this step i had some problem with folders and something that works is to add this line:
+
+```dockerfile
+RUN ln -s /var/www/laravel/public /var/www/html
+```
+
+Now, we can access our project in http://localhost:8080
