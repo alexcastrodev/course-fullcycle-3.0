@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  laravel:
+    image: newgate7x/laravel:prod
+    build: 
+      context: ../4_practices
+    container_name: laravel
+    networks:
+      - laranet
+  nginx:
+    image: newgate7x/nginx:prod
+    container_name: nginx
+    networks:
+      - laranet
+    ports:
+      - "8080:80"
+
+networks:
+ laranet:
+    driver: bridge
