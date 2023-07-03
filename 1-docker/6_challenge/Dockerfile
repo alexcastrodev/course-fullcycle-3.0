@@ -4,8 +4,11 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o /app/main hello.go
+RUN go mod init fc_golang
+
+RUN go build -o main
 
 FROM scratch
-COPY --from=builder /app/main /fc_golang
-CMD ["/fc_golang"]
+WORKDIR /app
+COPY --from=builder /app .
+CMD ["./main"]
