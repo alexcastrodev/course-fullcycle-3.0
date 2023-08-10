@@ -89,3 +89,11 @@ Accept: application/json
 If server cannot accept content type, it should return 415 Unsupported Media Type
 
 HTTP/1.1 415 Unsupported Media Type
+
+# GraphQL
+
+You can browser `graphQL-code` folder to see the code.
+
+- GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data.
+
+- GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
