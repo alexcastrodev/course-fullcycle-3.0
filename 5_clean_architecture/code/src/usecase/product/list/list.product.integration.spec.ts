@@ -4,7 +4,7 @@ import ProductRepository from "../../../infrastructure/product/repository/sequel
 import Product from "../../../domain/product/entity/product";
 import ListProductUseCase from "./list.product.usecase";
 
-describe("Test create product use case", () => {
+describe("Test listing products use case", () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
@@ -23,7 +23,7 @@ describe("Test create product use case", () => {
     await sequelize.close();
   });
 
-  it("should create a product", async () => {
+  it("should list all products", async () => {
     const productRepository = new ProductRepository();
 
     // Seed

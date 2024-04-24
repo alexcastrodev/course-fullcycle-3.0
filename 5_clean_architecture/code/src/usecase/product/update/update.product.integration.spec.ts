@@ -5,7 +5,7 @@ import UpdateProductUseCase from "./update.product.usecase";
 import ProductFactory from "../../../domain/product/factory/product.factory";
 import Product from "../../../domain/product/entity/product";
 
-describe("Test create product use case", () => {
+describe("Test update product use case", () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
