@@ -22,7 +22,7 @@ describe("Test create product use case", () => {
     await sequelize.close();
   });
 
-  it("should find a customer", async () => {
+  it("should create a product", async () => {
     const productRepository = new ProductRepository();
     const usecase = new CreateProductUseCase(productRepository);
 
