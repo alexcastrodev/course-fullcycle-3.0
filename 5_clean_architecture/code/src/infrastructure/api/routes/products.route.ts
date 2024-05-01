@@ -23,6 +23,7 @@ productRoute.post("/", async (req: Request, res: Response) => {
     const output = await usecase.execute(productDto);
     res.send(output);
   } catch (err) {
+    // TODO: Handle error 422 if receive instance of NotificationError
     res.status(500).send(err);
   }
 });
